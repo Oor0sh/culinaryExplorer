@@ -37,6 +37,10 @@
                         <input type="password" id="passwordCon" class="m-2" v-model="passwordCon">
                     </div>
 
+                    <div>
+                        <b-modal v-model="modalShow">{{ message }}</b-modal>
+                    </div>
+
                 <div class="form-group m-3">
                     <button @click="register()" class="btn btn-success col-md-3">Register</button>
                 </div>
@@ -60,7 +64,9 @@ export default {
             email: '',
             username: '',
             password: '',
-            passwordCon: ''
+            passwordCon: '',
+            modalShow: false,
+            message: ''
         }
     },
     methods: {
@@ -91,18 +97,19 @@ export default {
                     }
                 })
                 if (write == false) {
-                    alert("Please enter an email adress or a user with that email address already exists.");
-                    return;
+                    this.modalShow = true;
+                    this.message = "Please enter a valid email adress or a user with that email address already exists.";
                 }
                 if (write == true) {
+                    this.modalShow = true;
                     users.push(userToAdd);
-                    alert("Registration successful! You can log into your account now.");
+                    this.message = "Registration successful! You can log into your account now.";
                     this.$router.push("/login");    
                 }
             }
             else {
-                alert("Invalid data. Your name and last name must start with a capital letter and the password must include at least 3 characters.");
-                return;
+                this.modalShow = true;
+                this.message = "Invalid data. Your name and last name must start with a capital letter and the password must include at least 3 characters.";
             }
         }
     },

@@ -15,6 +15,10 @@
             <input type="password" id="password" class="m-2" v-model="password">
             </div>
 
+            <div>
+                <b-modal v-model="modalShow">{{ message }}</b-modal>
+            </div>
+
             <div class="form-group m-3">
                 <button @click="login()" class="btn btn-success col-md-3">Login</button>
             </div>
@@ -35,7 +39,9 @@ export default {
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            modalShow: false,
+            message: ''
         }
     },
     computed: {
@@ -61,12 +67,13 @@ export default {
                     location.reload();
                 }
                 else {
-                    alert("No user found under entered credentials.");
-                    return;
+                    this.modalShow = true;
+                    this.message = "No user found under entered credentials.";
                 }
             }
             else {
-                alert("Please enter valid credentials.");
+                this.modalShow = true;
+                this.message = "Please enter valid credentials.";
             }
         }
     }
