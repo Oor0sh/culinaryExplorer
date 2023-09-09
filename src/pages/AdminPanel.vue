@@ -89,6 +89,10 @@
                           <div>
                             <button @click="saveChanges(recipeToEdit.label)" :id="recipeToEdit.label" class="btn btn-warning">Save changes</button>
                           </div>
+
+                        <div>
+                            <b-modal v-model="modalShow">{{ message }}</b-modal>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -108,7 +112,9 @@ export default {
             editedName: '',
             editedImage: '',
             healthLabels: this.$store.state.healthLabels,
-            cuisines: this.$store.state.cuisines
+            cuisines: this.$store.state.cuisines,
+            modalShow: false,
+            message: ''
         }
     },
     computed: {
@@ -180,7 +186,8 @@ export default {
             toEdit.recipe.healthLabels = editedLabels;
             this.$store.state.$forceChanges;
 
-            alert("Changes successfully saved!");
+            this.modalShow = true;
+            this.message = "Changes successfully saved!";
             this.closeModal();
             
         },
