@@ -4,7 +4,7 @@
 
             <img width="40%" class="mb-2" src="../assets/logo1.png" />
 
-            <form>
+            <form id="regForm">
 
                 <div class="form-group">
                         <label for="name">Name:</label>
