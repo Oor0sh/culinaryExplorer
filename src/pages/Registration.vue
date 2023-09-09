@@ -104,7 +104,6 @@ export default {
                     this.modalShow = true;
                     users.push(userToAdd);
                     this.message = "Registration successful! You can go ahead and log into your account now.";
-                    this.formReset();
                 }
             }
             else {
