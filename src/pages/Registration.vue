@@ -103,14 +103,18 @@ export default {
                 if (write == true) {
                     this.modalShow = true;
                     users.push(userToAdd);
-                    this.message = "Registration successful! You can log into your account now.";
-                    this.$router.push("/login");    
+                    this.message = "Registration successful! You can go ahead and log into your account now.";
+                    this.formReset();
                 }
             }
             else {
                 this.modalShow = true;
                 this.message = "Invalid data. Your name and last name must start with a capital letter and the password must include at least 3 characters.";
             }
+        },
+        formReset() {
+            let form = document.getElementById("regForm");
+            form.reset();
         }
     },
     mounted() {
