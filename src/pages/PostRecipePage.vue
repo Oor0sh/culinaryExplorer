@@ -86,6 +86,10 @@
         </form>
     </div>
 
+    <div>
+        <b-modal v-model="modalShow">{{ message }}</b-modal>
+    </div>
+
     <div class="col-md-5" id="recipePreview">
         <div class="center sticky-top col-md-8" style="height:500px;" id="recipeBox">
             <div class="center mt-4 recipePictureClass" v-if="!recipeImage" id="recipePicture">
@@ -122,7 +126,9 @@ export default{
             selectedHealthLabels: '',
             selectedDiet: '',
             cuisineType: '',
-            cuisines: this.$store.state.cuisines
+            cuisines: this.$store.state.cuisines,
+            modalShow: false,
+            message: ''
         }
     },
     computed: {
@@ -186,17 +192,18 @@ export default{
             }
 
             if (newRecipe.recipe.label == '') {
-                alert("Please enter a name for your recipe.");
-                return;
+                this.modalShow = true;
+                this.message = "Please enter a name for your recipe.";
             }
 
             if (newRecipe.recipe.ingredientLines.length == 0) {
-                alert("Please add at least one ingredient.");
-                return;
+                this.modalShow = true;
+                this.message = "Please add at least one ingredient.";
             }
 
             if (this.$store.dispatch('saveRecipe', newRecipe)) {
-                alert("Recipe successfully posted!");
+                this.modalShow = true;
+                this.message = "Recipe successfully posted!";
             }
 
             
